@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+###BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*id-1aj@c9@lipov71m_wny8crazzuir%%nts5=zh5i2)exqod'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+### DEBUG = True
 
-ALLOWED_HOSTS = []
+### ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 
 # Application definition
@@ -74,12 +74,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+###DATABASES = {
+###    'default': {
+###        'ENGINE': 'django.db.backends.sqlite3',
+###        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+###    }
+###}
 
 
 # Password validation
@@ -121,6 +121,41 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Alowing it to be accessed by local host and by pythonanywhere.com
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+
+# url for redirect after logging in 
+
+LOGIN_REDIRECT_URL = '/'
+
+
+
+
+
+# lines for heroku.com edited items are commented out whith a triple hash above
+import dj_database_url
+
+...
+
+DEBUG = False
+
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+
+...
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'djangogirls',
+        'USER': 'name',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+...
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+
